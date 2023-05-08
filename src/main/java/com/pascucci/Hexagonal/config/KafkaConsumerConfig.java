@@ -17,9 +17,10 @@ import java.util.Map;
 
 import static org.apache.kafka.clients.consumer.ConsumerConfig.AUTO_OFFSET_RESET_CONFIG;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.GROUP_ID_CONFIG;
-import static org.apache.kafka.clients.producer.ProducerConfig.BOOTSTRAP_SERVERS_CONFIG;
-import static org.apache.kafka.clients.producer.ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG;
-import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG;
+
 
 @EnableKafka
 @Configuration
@@ -30,8 +31,8 @@ public class KafkaConsumerConfig {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(GROUP_ID_CONFIG, "pascucci");
-        configProps.put(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(VALUE_SERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        configProps.put(KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configProps.put(AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         return new DefaultKafkaConsumerFactory<>(configProps, new StringDeserializer(),
