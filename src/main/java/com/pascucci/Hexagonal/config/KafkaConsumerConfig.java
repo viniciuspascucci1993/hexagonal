@@ -31,7 +31,7 @@ public class KafkaConsumerConfig {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(GROUP_ID_CONFIG, "pascucci");
-        configProps.put(KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configProps.put(AUTO_OFFSET_RESET_CONFIG, "earliest");
 
