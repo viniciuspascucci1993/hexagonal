@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8089
 spring:
   data:
     mongodb:
@@ -13,3 +13,5 @@ pascucci:
   client:
     address:
       url: http://localhost:8082/addresses
+    vehicle:
+      url: http://localhost:8084/chassis

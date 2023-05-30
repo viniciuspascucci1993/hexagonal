@@ -1,9 +1,8 @@
 package com.pascucci.Hexagonal.config;
 
 
-import com.pascucci.Hexagonal.adapters.in.consumer.message.CustomerMessage;
+import com.pascucci.Hexagonal.adapters.in.consumer.message.WorkerMessage;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -26,8 +25,9 @@ import static org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZE
 @Configuration
 public class KafkaConsumerConfig {
 
+
     @Bean
-    public ConsumerFactory<String, CustomerMessage> consumerFactory() {
+    public ConsumerFactory<String, WorkerMessage> consumerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(GROUP_ID_CONFIG, "pascucci");
@@ -36,13 +36,13 @@ public class KafkaConsumerConfig {
         configProps.put(AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         return new DefaultKafkaConsumerFactory<>(configProps, new StringDeserializer(),
-                new JsonDeserializer<>(CustomerMessage.class));
+                new JsonDeserializer<>(WorkerMessage.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CustomerMessage>
+    public ConcurrentKafkaListenerContainerFactory<String, WorkerMessage>
             customerMessageConcurrentKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, CustomerMessage> factory =
+        ConcurrentKafkaListenerContainerFactory<String, WorkerMessage> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
 
         factory.setConsumerFactory(consumerFactory());
